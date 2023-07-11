@@ -5,7 +5,6 @@ Define the BaseModel class
 
 import uuid
 from datetime import datetime
-import models
 
 class BaseModel:
     """
@@ -42,3 +41,7 @@ class BaseModel:
         """Return a string rep of the object"""
         class_name = self.__class__.__name__
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
+
+    def __repr__(self):
+        """ Return string representation of an object """
+        return str(self)
