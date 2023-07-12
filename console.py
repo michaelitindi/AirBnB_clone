@@ -5,11 +5,12 @@ import json
 from models.base_model import BaseModel
 from models import storage
 import models
+from models.user import User
 
 class HBNBCommand(cmd.Cmd):
     """ Hbnb command interpreter"""
     prompt = '(hbnb) '
-    classes = ["BaseModel"]
+    classes = {"BaseModel", "User"}
 
     def emptyline(self):
         """an empty line + ENTER """
@@ -31,7 +32,10 @@ class HBNBCommand(cmd.Cmd):
         elif arg not in self.classes:
             print("** class doesn't exist **")
         else:
-            obj = BaseModel()
+            if arg is "User":
+                obj = User()
+            else:
+                obj = BaseModel()
             obj.save()
             print(obj.id)
 

@@ -5,7 +5,7 @@
 
 import json
 from models.base_model import BaseModel
-
+from models.user import User
 class FileStorage:
     """Serialize instances to JSON file and deserialize JSON file to instances
     """
@@ -42,3 +42,10 @@ class FileStorage:
                     self.__objects[key] = obj
         except FileNotFoundError:
             pass
+
+    def classes(self):
+        """Return dict for serialization/deserialization"""
+        return{
+            'BaseModel': BaseModel,
+            'User': User,
+        }
