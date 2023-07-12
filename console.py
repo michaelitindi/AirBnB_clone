@@ -10,7 +10,13 @@ from models.user import User
 class HBNBCommand(cmd.Cmd):
     """ Hbnb command interpreter"""
     prompt = '(hbnb) '
-    classes = {"BaseModel", "User"}
+    classes = {"BaseModel",
+               "User",
+               "Place",
+               "Amenity",
+               "Review",
+               "State",
+               "City"}
 
     def emptyline(self):
         """an empty line + ENTER """
@@ -34,6 +40,16 @@ class HBNBCommand(cmd.Cmd):
         else:
             if arg is "User":
                 obj = User()
+            elif arg is "Place":
+                obj = Place()
+            elif arg is "Amenity":
+                obj = Amenity()
+            elif arg is "City":
+                obj = City()
+            elif arg is "State":
+                obj = State()
+            elif arg is "Review":
+                obj = Review()
             else:
                 obj = BaseModel()
             obj.save()

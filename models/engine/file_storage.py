@@ -6,6 +6,13 @@
 import json
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City
+from models.review import Review
+from models.amenity import Amenity
+from models.place import Place
+
+
 class FileStorage:
     """Serialize instances to JSON file and deserialize JSON file to instances
     """
@@ -48,4 +55,8 @@ class FileStorage:
         return{
             'BaseModel': BaseModel,
             'User': User,
+            'Place': Place,
+            'City': City,
+            'Review': Review,
+            'Amenity': Amenity
         }
