@@ -52,7 +52,7 @@ class FileStorage:
 
     def classes(self):
         """Return dict for serialization/deserialization"""
-        return{
+        return {
             'BaseModel': BaseModel,
             'User': User,
             'Place': Place,
