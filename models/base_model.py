@@ -7,16 +7,19 @@ import uuid
 from datetime import datetime
 import models
 
+
 class BaseModel:
     """
     Define common attributes and methods for other classes
     """
+
     def __init__(self, *args, **kwargs):
         """initialize a new instance of BaseModel"""
         if kwargs:
             for key, value in kwargs.items():
                 if key == 'created_at' or key == 'updated_at':
-                    setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                    setattr(self, key, datetime.strptime(
+                        value, '%Y-%m-%dT%H:%M:%S.%f'))
                 elif key != '__class__':
                     setattr(self, key, value)
             if 'id' not in kwargs:
@@ -24,9 +27,9 @@ class BaseModel:
 
         else:
             self.id = str(uuid.uuid4())
-            self.created_at = self.updated_at =datetime.now()
+            self.created_at = self.updated_at = datetime.now()
             self.first_name = ""
-            #from models import storage
+            # from models import storage
             models.storage.new(self)
 
     def save(self):
