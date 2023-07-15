@@ -6,6 +6,11 @@ from models.base_model import BaseModel
 from models import storage
 import models
 from models.user import User
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
+from models.state import State
+from models.city import City
 
 
 class HBNBCommand(cmd.Cmd):
@@ -39,17 +44,17 @@ class HBNBCommand(cmd.Cmd):
         elif arg not in self.classes:
             print("** class doesn't exist **")
         else:
-            if arg is "User":
+            if arg == "User":
                 obj = User()
-            elif arg is "Place":
+            elif arg == "Place":
                 obj = Place()
-            elif arg is "Amenity":
+            elif arg == "Amenity":
                 obj = Amenity()
-            elif arg is "City":
+            elif arg == "City":
                 obj = City()
-            elif arg is "State":
+            elif arg == "State":
                 obj = State()
-            elif arg is "Review":
+            elif arg == "Review":
                 obj = Review()
             else:
                 obj = BaseModel()
@@ -91,11 +96,15 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """print all string rep of instances"""
-        objs = storage.all().values()
-        if arg and arg not in self.classes:
-            print("** class doesn't exist **")
-        else:
-            print([str(obj) for obj in objs])
+        ars = storage.all()
+        if not arg:
+            print([str(obj) for obj in ars.value()])
+            return
+        args =arg.split()
+        if (self.classes(arg, 1) == 1):
+            return
+        print([str(obj) for obj in ars.value()
+            if obj.__class__.__name__ == args[0]])
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id"""
