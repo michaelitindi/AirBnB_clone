@@ -49,6 +49,8 @@ class FileStorage:
                     self.__objects[key] = obj
         except FileNotFoundError:
             pass
+        except json.JSONDecodeError:
+            pass
 
     def classes(self):
         """Return dict for serialization/deserialization"""
