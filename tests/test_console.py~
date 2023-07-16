@@ -1,0 +1,59 @@
+#!/usr/bin/python3
+"""unit tests for console.py """
+
+import unittest
+from io import StringIO
+from unittest.mock import patch
+from console import HBNBCommand
+
+
+class TestConsole(unittest.TestCase):
+    """ console unittests """
+
+    def tearDown(self):
+        pass
+
+    def setUp(self):
+        self.console = HBNBCommand()
+
+    def test_show(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("show BaseModel 885985080-585erhf")
+            output = f.getvalue().strip()
+            self.assertEqual(output, "** no instance found **")
+
+    def test_create(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("create BaseModel")
+            output = f.getvalue().strip()
+            self.assertTrue(output)
+
+    def test_all(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("all")
+            output = f.getvalue().strip()
+            self.assertTrue(output)
+
+    def test_destroy(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("destroy BaseModel 12340994-58886")
+            output = f.getvalue().strip()
+            self.assertEqual(output, "** no instance found **")
+
+    def test_update(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd('update BaseModel 1234-2445 name "Kaende"')
+            output = f.getvalue().strip()
+            self.assertEqual(output, "** no instance found **")+
+
+    def test_count(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("count BaseModel")
+            output = f.getvalue().strip()
+            self.assertEqual(output, "0")
+
+    def test_unknown(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("asande")
+            output = f.getvalue().strip()
+            self.assertTrue(output.startswith("*** Unknown syntax:"))
